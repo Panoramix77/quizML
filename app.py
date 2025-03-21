@@ -19,11 +19,6 @@ quiz = [
         "correct": 2
     },
     {
-        "question": "¿En un conjunto de datos desequilibrado, qué métrica de evaluación es más informativa?",
-        "options": ["Precisión (Accuracy)", "Sensibilidad (Recall)", "Especificidad (Specificity)", "Validación (Validation)"],
-        "correct": 2
-    },
-    {
         "question": "¿Cuál de las siguientes tareas se clasifica como aprendizaje no supervisado?",
         "options": [
             "Clasificación de imágenes",
@@ -52,21 +47,6 @@ quiz = [
         "question": "¿Cuál de las siguientes técnicas se utiliza para preprocesar datos en machine learning y reducir la dimensionalidad?",
         "options": ["Regresión lineal", "Clustering", "Análisis de componentes principales (PCA)", "Gradiente descendente"],
         "correct": 3
-    },
-    {
-        "question": "¿Cuál es el propósito principal de la regularización en modelos de machine learning?",
-        "options": [
-            "Aumentar el overfitting",
-            "Reducir el sesgo del modelo",
-            "Mejorar la precisión en el conjunto de entrenamiento",
-            "Reducir la complejidad del modelo y prevenir el overfitting"
-        ],
-        "correct": 4
-    },
-    {
-        "question": "¿Qué tipo de algoritmo de machine learning se utiliza para problemas de clasificación?",
-        "options": ["K-means", "Regresión logística", "Análisis de componentes principales (PCA)", "Regresión lineal"],
-        "correct": 2
     },
     {
         "question": "¿Cuál es el objetivo del algoritmo de agrupamiento (clustering) en machine learning?",
@@ -129,16 +109,6 @@ quiz = [
         "correct": 3
     },
     {
-        "question": "¿Cuál es la función principal de un conjunto de entrenamiento, validación y prueba en machine learning?",
-        "options": [
-            "Proporcionar datos para el entrenamiento del modelo",
-            "Evaluar el rendimiento del modelo en datos no vistos",
-            "Ajustar los hiperparámetros del modelo",
-            "Todas las anteriores"
-        ],
-        "correct": 4
-    },
-    {
         "question": "¿Qué es la matriz de confusión en problemas de clasificación?",
         "options": [
             "Una representación gráfica de los datos",
@@ -147,16 +117,6 @@ quiz = [
             "Un tipo de regularización"
         ],
         "correct": 2
-    },
-    {
-        "question": "¿En el contexto de machine learning, qué es la validación out-of-sample?",
-        "options": [
-            "Un enfoque para evaluar el rendimiento del modelo utilizando datos de entrenamiento",
-            "Una técnica para prevenir el overfitting",
-            "La evaluación del modelo en datos que no fueron utilizados durante el entrenamiento ni la validación",
-            "Una estrategia de aumento de datos"
-        ],
-        "correct": 3
     },
     {
         "question": "¿En un problema de aprendizaje no supervisado, cuál es el objetivo principal?",
