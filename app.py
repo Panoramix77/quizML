@@ -130,7 +130,7 @@ quiz = [
     }
 ]
 
-# Mezclar preguntas y opciones al cargar la app
+# Inicialización del estado
 if 'quiz' not in st.session_state:
     st.session_state.quiz = quiz.copy()
     random.shuffle(st.session_state.quiz)
@@ -138,6 +138,9 @@ if 'quiz' not in st.session_state:
         q["options_shuffled"] = q["options"].copy()
         random.shuffle(q["options_shuffled"])
         q["correct_index"] = q["options_shuffled"].index(q["options"][q["correct"] - 1]) + 1
+        q["user_answer"] = None
+        q["confirmed"] = False
+        q["is_correct"] = None
     st.session_state.score = 0
     st.session_state.submitted = False
 
@@ -146,15 +149,45 @@ st.title("¡Test Interactivo de Machine Learning!")
 
 for i, q in enumerate(st.session_state.quiz, 1):
     st.subheader(f"Pregunta {i}: {q['question']}")
-    answer = st.radio("Selecciona una opción", q["options_shuffled"], key=f"q{i}")
+    
+    # Selección de respuesta
+    answer = st.radio(
+        "Selecciona una opción",
+        q["options_shuffled"],
+        key=f"q{i}",
+        index=None if q["user_answer"] is None else q["options_shuffled"].index(q["user_answer"])
+    )
     q["user_answer"] = answer
 
-if st.button("Enviar respuestas"):
-    st.session_state.submitted = True
-    for q in st.session_state.quiz:
-        if q["options_shuffled"].index(q["user_answer"]) + 1 == q["correct_index"]:
-            st.session_state.score += 1
+    # Botón de confirmación para cada pregunta
+    if st.button("Confirmar respuesta", key=f"confirm_q{i}"):
+        if q["user_answer"] is not None:
+            q["confirmed"] = True
+            q["is_correct"] = (q["options_shuffled"].index(q["user_answer"]) + 1 == q["correct_index"])
+            if q["is_correct"]:
+                st.success("¡Correcto!")
+                st.session_state.score += 1
+            else:
+                correct_answer = q["options"][q["correct"] - 1]
+                st.error(f"Incorrecto. La respuesta correcta es: {correct_answer}")
+        else:
+            st.warning("Por favor, selecciona una opción antes de confirmar.")
 
+    # Mostrar estado de la pregunta
+    if q["confirmed"]:
+        if q["is_correct"]:
+            st.write("✅ Respuesta confirmada como correcta.")
+        else:
+            st.write("❌ Respuesta confirmada como incorrecta.")
+
+# Botón para finalizar el test
+if st.button("Finalizar test"):
+    if all(q["confirmed"] for q in st.session_state.quiz):
+        st.session_state.submitted = True
+    else:
+        st.warning("Por favor, confirma todas las respuestas antes de finalizar.")
+
+# Mostrar resultados finales
 if st.session_state.submitted:
     percentage = (st.session_state.score / len(st.session_state.quiz)) * 100
     st.success(f"Test finalizado. Tu puntuación: {st.session_state.score}/{len(st.session_state.quiz)}")
